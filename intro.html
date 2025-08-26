@@ -1,122 +1,117 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Rose Loading Screen</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/png" href="main/0.png">
+  <title>My Girlfriend</title>
   <style>
     body {
-      margin: 0;
-      padding: 0;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: linear-gradient(180deg, #7F00FF, #FF00FF); /* violet to magenta */
-      overflow: hidden;
       font-family: Arial, sans-serif;
+      background: linear-gradient(180deg, magenta, violet);
+      margin: 0;
+      padding: 30px;
+      text-align: center; /* centers inline-block elements */
     }
 
-    /* Loading screen container */
-    #loading {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(180deg, #7F00FF, #FF00FF); /* violet to magenta */
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      z-index: 10;
-    }
-
-    /* Rose rotation */
-    .rose {
-      font-size: 80px;
-      animation: rotate 4s linear infinite;
-    }
-
-    @keyframes rotate {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-
-    /* Falling hearts */
-    .heart {
-      position: absolute;
-      top: -20px;
-      color: #ffcccc;
-      font-size: 20px;
-      animation: fall linear forwards;
-    }
-
-    @keyframes fall {
-      to {
-        transform: translateY(110vh);
-        opacity: 0;
-      }
-    }
-
-    /* Button after loading */
-    #main {
-      display: none;
-      text-align: center;
-    }
-
-    .heart-button {
-      background: red;
-      color: white;
-      font-size: 20px;
-      padding: 15px 40px;
-      border: none;
-      border-radius: 50px; /* pill-style */
-      cursor: pointer;
+    /* Rainbow animated text with magenta/violet border */
+    h1 {
+      font-size: 48px;
       font-weight: bold;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-      transition: transform 0.2s, background 0.3s;
+      padding: 12px 24px;
+      border: 4px solid; 
+      border-image: linear-gradient(90deg, maroon, red) 1; /* magenta-violet frame */
+      border-radius: 16px;
+      display: inline-block; /* keeps border tight around text */
+
+      background: linear-gradient(
+        270deg,
+        red,
+        orange,
+        yellow,
+        green,
+        blue,
+        indigo,
+        violet,
+        red
+      );
+      background-size: 600% 600%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      color: transparent;
+      animation: rainbowMove 8s linear infinite;
     }
 
-    .heart-button:hover {
-      background: darkred;
-      transform: scale(1.05);
+    @keyframes rainbowMove {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 100% 50%; }
+    }
+
+    .album {
+      margin-top: 30px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .card {
+      background: #fff;
+      border: 1px solid #ffccd5;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 6px 16px rgba(0,0,0,.12);
+      text-decoration: none;
+      color: #800000;
+      transition: transform .2s, box-shadow .2s;
+    }
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 24px rgba(179,0,59,.35);
+    }
+    .card img {
+      width: 100%;
+      display: block;
+    }
+    .cap {
+      padding: 12px;
+      font-size: 18px;
+      font-weight: bold;
+      background: linear-gradient(180deg, #fff, #ffe6e6);
+      text-align: center;
     }
   </style>
 </head>
 <body>
-  <!-- Loading screen -->
-  <div id="loading">
-    <div class="rose">🌹</div>
-  </div>
+  <h1>Camille Jose</h1>
 
-  <!-- Main screen -->
-  <div id="main">
-    <button class="heart-button" onclick="window.location.href='index.html'">❤️ Open</button>
-  </div>
-
-  <script>
-    // Generate falling hearts
-    function createHeart() {
-      const heart = document.createElement("div");
-      heart.classList.add("heart");
-      heart.innerHTML = "❤️";
-      heart.style.left = Math.random() * 100 + "vw";
-      heart.style.animationDuration = (Math.random() * 3 + 2) + "s";
-      document.body.appendChild(heart);
-
-      setTimeout(() => {
-        heart.remove();
-      }, 5000);
-    }
-
-    setInterval(createHeart, 500);
-
-    // Hide loading after 7s and show main
-    setTimeout(() => {
-      document.getElementById("loading").style.display = "none";
-      document.getElementById("main").style.display = "block";
-    }, 7000);
-  </script>
+  <section class="album">
+    <a class="card" href="2025.html" target="_blank">
+      <img src="main/1.jpg" alt="2025 Memories">
+      <div class="cap">2025</div>
+    </a>
+    <a class="card" href="2026.html" target="_blank">
+      <img src="images/2026.jpg" alt="2026 Memories">
+      <div class="cap">2026</div>
+    </a>
+    <a class="card" href="2027.html" target="_blank">
+      <img src="images/2027.jpg" alt="2027 Memories">
+      <div class="cap">2027</div>
+    </a>
+    <a class="card" href="2028.html" target="_blank">
+      <img src="images/2028.jpg" alt="2028 Memories">
+      <div class="cap">2028</div>
+    </a>
+    <a class="card" href="2029.html" target="_blank">
+      <img src="images/2029.jpg" alt="2029 Memories">
+      <div class="cap">2029</div>
+    </a>
+    <a class="card" href="2030.html" target="_blank">
+      <img src="images/2030.jpg" alt="2030 Memories">
+      <div class="cap">2030</div>
+    </a>
+  </section>
 </body>
 </html>
