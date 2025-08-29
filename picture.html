@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="en">
 <head>
   <meta charset="utf-8" />
@@ -31,6 +31,10 @@
       position: relative;
       z-index: 2;
     }
+    .item {
+      text-align: center;
+      position: relative; /* so label can float on top */
+    }
     .gallery img {
       width: 100%;
       height: 250px;
@@ -38,17 +42,44 @@
       border-radius: 15px;
       border: 6px solid #ff4d6d;
       box-shadow: 0 6px 16px rgba(0,0,0,0.3);
-      /* background removed so hearts show through */
       transition: transform 0.3s ease, box-shadow 0.3s ease;
       cursor: pointer;
       position: relative;
-      z-index: 2; /* keeps images clickable */
+      z-index: 1;
     }
     .gallery img:hover {
       transform: scale(1.05);
       box-shadow: 0 10px 20px rgba(0,0,0,0.5);
       border-color: #cc0033;
     }
+
+    /* Running Label */
+    .label {
+      position: absolute;
+      top: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 16px;
+      font-weight: bold;
+      color: #fff;
+      background: rgba(179,0,59,0.8);
+      padding: 6px 10px;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+      white-space: nowrap;
+      overflow: hidden;
+      width: 80%;
+    }
+    .label span {
+      display: inline-block;
+      padding-left: 100%; /* start from outside right */
+      animation: marquee 8s linear infinite;
+    }
+    @keyframes marquee {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-100%); }
+    }
+
     footer {
       text-align: center;
       padding: 16px;
@@ -83,13 +114,39 @@
       justify-content: center;
       align-items: center;
     }
+    .modal-content {
+      position: relative;
+      text-align: center;
+    }
     .modal img {
-      max-width: 90%;
-      max-height: 80%;
+      max-width: 70%;
+      max-height: 60%;
       border-radius: 15px;
       border: 8px solid #ff4d6d;
       box-shadow: 0 8px 24px rgba(0,0,0,0.7);
     }
+    .modal-label {
+      position: absolute;
+      top: 20px; 
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(179,0,59,0.85);
+      color: #fff;
+      padding: 8px 16px;
+      border-radius: 12px;
+      font-size: 18px;
+      font-weight: bold;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+      white-space: nowrap;
+      overflow: hidden;
+      width: 80%;
+    }
+    .modal-label span {
+      display: inline-block;
+      padding-left: 100%;
+      animation: marquee 10s linear infinite;
+    }
+
     .close {
       position: absolute;
       top: 20px;
@@ -111,17 +168,11 @@
       font-size: 24px;
       pointer-events: none;
       animation: floatUp 1.5s ease-out forwards;
-      z-index: 9999; /* always on top */
+      z-index: 9999;
     }
     @keyframes floatUp {
-      0% {
-        transform: translateY(0) scale(1);
-        opacity: 1;
-      }
-      100% {
-        transform: translateY(-100px) scale(1.8);
-        opacity: 0;
-      }
+      0% { transform: translateY(0) scale(1); opacity: 1; }
+      100% { transform: translateY(-100px) scale(1.8); opacity: 0; }
     }
   </style>
 </head>
@@ -131,21 +182,59 @@
   </header>
 
   <main class="gallery">
-    <img src="picture/1.jpg" alt="Sample Picture 1" data-sound="sounds/1.mp3">
-    <img src="picture/2.jpg" alt="Sample Picture 2" data-sound="sounds/2.mp3">
-    <img src="picture/4.jpg" alt="Sample Picture 3" data-sound="soundss/3.mp3">
-    <img src="picture/5.jpg" alt="Sample Picture 4" data-sound="soundss/4.mp3">
-    <img src="picture/6.jpg" alt="Sample Picture 5" data-sound="soundsss/5.mp3">
-    <img src="picture/7.jpg" alt="Sample Picture 6" data-sound="soundsss/6.mp3">
-    <img src="picture/8.jpg" alt="Sample Picture 7" data-sound="soundssss/7.mp3">
-    <img src="picture/9.jpg" alt="Sample Picture 8" data-sound="soundssss/8.mp3">
-    <img src="picture/sample1.jpg" alt="Sample Picture 9" data-sound="sounds/9.mp3">
+    <div class="item">
+      <img src="picture/1.jpg" alt="Sample Picture 1" data-sound="sounds/1.mp3">
+      <div class="label"><span>SUPAFLY - Sakin ka (Official Lyrics Video)
+</span></div>
+    </div>
+    <div class="item">
+      <img src="picture/2.jpg" alt="Sample Picture 2" data-sound="sounds/2.mp3">
+      <div class="label"><span>Baby Blood - MAS GUSTO KITA (Official Audio)
+</span></div>
+    </div>
+    <div class="item">
+      <img src="picture/4.jpg" alt="Sample Picture 3" data-sound="soundss/3.mp3">
+      <div class="label"><span>IPAGDADAMOT KITA - Realest Cram, OLG Zak, Nateman & CK YG (Official Lyric Video)
+</span></div>
+    </div>
+    <div class="item">
+      <img src="picture/5.jpg" alt="Sample Picture 4" data-sound="soundss/4.mp3">
+      <div class="label"><span>kiyo - Ikaw Lang (Official Music Video)
+</span></div>
+    </div>
+    <div class="item">
+      <img src="picture/6.jpg" alt="Sample Picture 5" data-sound="soundsss/5.mp3">
+      <div class="label"><span>NOBITA - IKAW LANG | Official Lyric Video
+</span></div>
+    </div>
+    <div class="item">
+      <img src="picture/7.jpg" alt="Sample Picture 6" data-sound="soundsss/6.mp3">
+      <div class="label"><span>Sica - PERSIAN RAGZ (Official Lyric Video)
+</span></div>
+    </div>
+    <div class="item">
+      <img src="picture/8.jpg" alt="Sample Picture 7" data-sound="soundssss/7.mp3">
+      <div class="label"><span>SUPAFLY - U lost? (OFFICIAL MUSIC VIDEO)
+</span></div>
+    </div>
+    <div class="item">
+      <img src="picture/9.jpg" alt="Sample Picture 8" data-sound="soundssss/8.mp3">
+      <div class="label"><span>WAIIAN feat. Nicole Anjela - SOFTIE (Official Audio)
+</span></div>
+    </div>
+    <div class="item">
+      <img src="picture/sample1.jpg" alt="Sample Picture 9" data-sound="sounds/9.mp3">
+      <div class="label"><span>Song Title 9</span></div>
+    </div>
   </main>
 
   <!-- Modal -->
   <div id="myModal" class="modal">
     <span class="close">&times;</span>
-    <img id="modalImg" src="">
+    <div class="modal-content">
+      <img id="modalImg" src="">
+      <div id="modalLabel" class="modal-label"><span></span></div>
+    </div>
   </div>
 
   <footer>
@@ -155,22 +244,24 @@
   <script>
     const modal = document.getElementById("myModal");
     const modalImg = document.getElementById("modalImg");
+    const modalLabel = document.getElementById("modalLabel").querySelector("span");
     const closeBtn = document.querySelector(".close");
     const images = document.querySelectorAll(".gallery img");
 
-    let audio = new Audio(); // single audio player
+    let audio = new Audio();
 
     images.forEach(img => {
       img.addEventListener("click", (e) => {
-        e.stopPropagation(); // prevent heart effect when clicking images
+        e.stopPropagation(); 
         modal.style.display = "flex";
         modalImg.src = img.src;
 
-        // stop any current sound
+        const songLabel = img.nextElementSibling ? img.nextElementSibling.textContent : "";
+        modalLabel.textContent = songLabel;
+
         audio.pause();
         audio.currentTime = 0;
 
-        // play new sound
         const soundFile = img.getAttribute("data-sound");
         if (soundFile) {
           audio = new Audio(soundFile);
@@ -193,11 +284,10 @@
       }
     });
 
-    // Hearts effect on background click/touch
     const colors = ["#ff4d6d", "#ffcc00", "#66ccff", "#ff66ff", "#00cc99", "#ff6600"];
     
     document.body.addEventListener("click", (e) => {
-      if (e.target.closest(".gallery") || e.target.closest(".modal")) return; // ignore clicks on gallery/modal
+      if (e.target.closest(".gallery") || e.target.closest(".modal")) return; 
       createHeart(e.pageX, e.pageY);
     });
 
